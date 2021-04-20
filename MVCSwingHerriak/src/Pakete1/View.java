@@ -14,6 +14,7 @@ public class View extends javax.swing.JFrame {
     /**
      * Creates new form View
      */
+    TableModela nireTaula= new TableModela();
     public View() {
         initComponents();
         jTable1.setModel(new TableModela());
@@ -174,4 +175,5 @@ public class View extends javax.swing.JFrame {
     javax.swing.JTextArea jTextArea1;
     javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }

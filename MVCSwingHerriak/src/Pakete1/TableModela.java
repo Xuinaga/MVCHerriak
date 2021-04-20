@@ -24,37 +24,10 @@ import javax.swing.table.AbstractTableModel;
 public class TableModela extends AbstractTableModel {
 
     private String[] izenaZutabe = {"HERRIA", "PROBINTZIA", "HONDARTZA", "HONDARTZA"};
-    private ArrayList<Herria> nireDatuak = new ArrayList<>();
-
-    private Connection connect() {
-        // SQLite connection string
-        
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost/db_herriak", "root", "");;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
-    public TableModela() {
-
-        String sql = "SELECT herria, probintzia, hondartza, oharrak FROM Herriak";
-
-        try (Connection conn = this.connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-
-            // loop through the result set
-            while (rs.next()) {
-
-                nireDatuak.add(new Herria(rs.getString("herria"), rs.getString("probintzia"), rs.getBoolean("hondartza"), rs.getString("oharrak")));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
+    protected ArrayList<Herria> nireDatuak = new ArrayList<>();  
+    
+    public TableModela() {        
+        nireDatuak=Model.arrayListaBete();
     }
 
     @Override

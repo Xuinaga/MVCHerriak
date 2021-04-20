@@ -8,7 +8,10 @@ package Pakete1;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +19,7 @@ import java.sql.SQLException;
  */
 public class Model {
 
-    private Connection connect() {
+    private static Connection connect() {
         // SQLite connection string
         Connection conn = null;
         try {
@@ -26,6 +29,26 @@ public class Model {
             System.out.println(e.getMessage());
         }
         return conn;
+    }
+    public static ArrayList<Herria> arrayListaBete() {
+        
+        ArrayList<Herria> datuak=new ArrayList<>();
+        
+        String sql = "SELECT * FROM Herriak";
+
+        try (Connection conn = connect();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+
+            // loop through the result set
+            while (rs.next()) {
+
+                datuak.add(new Herria(rs.getString("herria"), rs.getString("probintzia"), rs.getBoolean("hondartza"), rs.getString("oharrak")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return datuak;
     }
 
     public void gehitu(Herria h) {

@@ -20,6 +20,9 @@ public class Controller implements ActionListener {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
+        
+        view.nireTaula.nireDatuak=model.arrayListaBete();
+        view.nireTaula.fireTableDataChanged();
         anadirActionListener(this);
     }
 

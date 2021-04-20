@@ -18,7 +18,7 @@ public class Model {
 
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:db/IzenenDBa.db";
+        String url = "jdbc:sqlite:db/Herriak.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -29,12 +29,12 @@ public class Model {
     }
 
     public void gehitu(Herria h) {
-        String sql = "INSERT INTO Herriak(Herria, Probintzia, Hondartza, Oharrak) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Herriak VALUES(?,?,?,?)";
 
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, h.getHerria());
-            pstmt.setString(2, h.getHerria());
+            pstmt.setString(2, h.getProbintzia());
             pstmt.setBoolean(3, h.isHondartza());
             pstmt.setString(4, h.getOharrak());
             pstmt.executeUpdate();

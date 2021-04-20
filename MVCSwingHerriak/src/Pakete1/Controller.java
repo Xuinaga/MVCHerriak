@@ -24,7 +24,7 @@ public class Controller implements ActionListener {
     }
 
     private void anadirActionListener(ActionListener listener) {
-        //GUIaren konponente guztiei gehitu listenerra
+        view.jButtonGehitu.addActionListener(listener);
 
     }
 
@@ -32,12 +32,15 @@ public class Controller implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String actionCommand = e.getActionCommand();
         //listenerrak entzun dezakeen eragiketa bakoitzeko. Konponenteek 'actionCommad' propietatea daukate
+        Herria h = new Herria(view.jTextField1.getText(),view.jComboBox1.getSelectedItem().toString(),view.jCheckBox1.isSelected(), view.jTextArea1.getText());
         switch (actionCommand) {
-            case "GEHITU":
-                System.out.println("Ondo gehitu da");
+            case "Herria gehitu":
+                model.gehitu(h);
+                view.jTable1.setModel(new TableModela());
                 break;
             default:
                 System.out.println("???");
         }
+        
     }
 }

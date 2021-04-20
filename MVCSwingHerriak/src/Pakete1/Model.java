@@ -18,10 +18,10 @@ public class Model {
 
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:db/Herriak.db";
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url);
+            conn = DriverManager.getConnection("jdbc:mariadb://localhost/db_herriak", "root", "");
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

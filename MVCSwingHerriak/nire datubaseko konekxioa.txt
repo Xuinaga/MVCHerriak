@@ -1,1 +1,2 @@
 "jdbc:mariadb://localhost/db_herriak", "root", ""
+"jdbc:mariadb://192.168.65.1:3306/HerrienDBa", "dam1", "dam1"

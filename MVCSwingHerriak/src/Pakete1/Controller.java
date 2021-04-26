@@ -28,6 +28,7 @@ public class Controller implements ActionListener {
 
     private void anadirActionListener(ActionListener listener) {
         view.jButtonGehitu.addActionListener(listener);
+        view.jButtonEzabatu.addActionListener(listener);
 
     }
 
@@ -39,6 +40,10 @@ public class Controller implements ActionListener {
         switch (actionCommand) {
             case "Herria gehitu":
                 model.gehitu(h);
+                view.jTable1.setModel(new TableModela());
+                break;
+            case "Herria ezabatu":
+                model.ezabatu();
                 view.jTable1.setModel(new TableModela());
                 break;
             default:

@@ -21,9 +21,15 @@ public class Model {
 
     private static Connection connect() {
         // SQLite connection string
+        String dbi="jdbc:mariadb://192.168.65.1:3306/HerrienDBa";
+        String useri="dam1";
+        String passi="dam1";
+        String dbni="jdbc:mariadb://192.168.65.1:3306/HerrienDBa";
+        String userni="dam1";
+        String passni="dam1";
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost/db_herriak", "root", "");
+            conn = DriverManager.getConnection(dbi,useri,passi);
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -52,7 +58,7 @@ public class Model {
     }
 
     public void gehitu(Herria h) {
-        String sql = "INSERT INTO Herriak VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Herriak(herria,probintzia,hondartza,oharrak) VALUES(?,?,?,?)";
 
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -61,9 +67,24 @@ public class Model {
             pstmt.setBoolean(3, h.isHondartza());
             pstmt.setString(4, h.getOharrak());
             pstmt.executeUpdate();
-
+            System.out.println("Herria ondo gehitu da.");
         } catch (SQLException e) {
             System.out.println("Herria ez da gehitu");
+        }
+    }
+    public void ezabatu(){
+        int ilara = View.jTable1.getSelectedRow();
+        String ezabatzekoHerria= (String)View.jTable1.getValueAt(ilara, 0);
+        String sql = "DELETE FROM Herriak WHERE herria = ?; ";
+
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, ezabatzekoHerria);
+            pstmt.executeUpdate();
+            System.out.println("Herria ezabatu da.");
+        }catch(SQLException e){
+            System.out.println("Herria ez da ezabatu.");
         }
     }
 }
